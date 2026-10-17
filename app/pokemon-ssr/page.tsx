@@ -1,5 +1,7 @@
 import axios from 'axios'
 
+import { connection } from 'next/server'
+
 interface Pokemon {
   name: string
   sprites: {
@@ -19,6 +21,8 @@ async function getPokemon(): Promise<Pokemon> {
 }
 
 export default async function PokemonSSR() {
+  await connection()
+
   const pokemon = await getPokemon()
 
   return (
